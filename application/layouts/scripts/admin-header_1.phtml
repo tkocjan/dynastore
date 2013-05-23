@@ -1,0 +1,30 @@
+<?php include 'active-class.phtml';?>
+
+<h2 class="noDisplay">Main Navigation</h2>
+    <div id="headwrap" class="clearfix">
+        
+        <div id="logo" class="left"><a href="<?=$this->baseUrl()?>/">
+            <img src="<?=$this->baseUrl()?>/images/layout/logo.png" alt="Shop till you drop..." />
+            </a></div>
+        
+        <div class="right">
+           <!--? include('_topnav.phtml'); ?-->
+
+           <div class="container" style="padding:20px;">
+      <div class="masthead">
+        <div class="navbar">
+          <div class="navbar-inner">
+            <div class="container">
+              <ul class="nav">
+        <li><a href="<?=$this->url(array('controller' => 'customer', 'action' => 'list'), 'admin', true); ?>" title="Customers">Customers</a></li>
+        <li><a href="<?=$this->url(array('controller' => 'catalog', 'action' => 'list'), 'admin', true); ?>" title="Catalog">Catalog</a></li>
+        <li><a href="<?=$this->baseUrl()?>/" title="Homepage">Store</a></li>
+    </ul>
+          </div>
+        </div><!-- /.navbar -->
+      </div>
+    </div>
+           </div>
+        </div>
+            
+        </div>    

@@ -1,0 +1,122 @@
+<!--?php include 'toggle-classes.phtml';?-->
+
+    <!--div id="headwrap" class="row clearfix"-->
+    <div class="row">
+        <!--h1 class="noDisplay"><?//$this->placeholder('Zend_View_Helper_HeadTitle')?></h1-->
+            
+        <div id="logo" class="span4">            
+            <a href="<?=$this->baseUrl()?>/">
+            <img src="<?=$this->baseUrl()?>/images/layout/logo.png" 
+                 alt="Shop till you drop..." />
+            </a></div>
+        
+        <!--div class="right"-->
+           <!--? include('_topnav.phtml'); ?-->
+ 
+           <div class="span7"> <!--style="padding:20px;"-->
+      <!--div class="masthead"-->
+        <div class="navbar">
+          <div class="navbar-inner">
+            <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" 
+                data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <div class="nav-collapse collapse">
+              <ul class="nav">
+                   <li class="<?=$this->conditionalActive('about')?>">
+                   <a href="<?= $this->url(array(
+                                'controller' => 'index',
+                                'action'     => 'index',
+                                'module'     => 'cms'
+                                ), 
+                                'default', true
+                            ); 
+                         ?>" title="about">About</a></li>
+                  <li class="<?=$this->conditionalActive('contact')?>">
+                    <a href="<?= $this->url(array(
+                                'controller' => 'index',
+                                'action'     => 'index',
+                                'module'     => 'cms'
+                                ), 
+                                'default', true
+                            ); 
+                         ?>" title="Contact">Contact</a></li>
+                  <li class="<?=$this->conditionalActive('index')?>">
+                    <a href="<?= $this->url(array(
+                                'controller' => 'index',
+                                'action'     => 'index',
+                                ), 
+                                'default', true
+                            ); 
+                         ?>" title="Homepage">Store</a>
+                  
+                  </li>
+                  
+              </ul>
+                <ul class="nav pull-right">
+                  <!--? if (!$this->AuthInfo()->isLoggedIn()): ?-->
+                  <li class="<?=$this->conditionalNoDisplay('register')?> <?=$this->conditionalActive('register')?>">
+                    <a href="<?= $this->url(array(
+                                'controller' => 'customer',
+                                'action'     => 'register',
+                                ), 
+                                'default', true
+                            ); 
+                         ?>" title="register">Register</a></li>
+                        <!--? endif; ?-->
+                <li class="dropdown <?=$this->conditionalNoDisplay('admin')?> 
+                           <?=$this->conditionalActive('admin')?>">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle 
+                                   <?=$this->conditionalNoDisplay('admin')?>" >
+                    Admin <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li class="<?=$this->conditionalActive('customer')?>">
+                        <a href="<?=$this->url(array(
+                                                'controller' => 'customer', 
+                                                'action' => 'list'), 
+                                        'admin', true); ?>" 
+                            title="Customers">Customers</a></li>
+                    <li class="<?=$this->conditionalActive('catalog')?>">
+                        <a href="<?=$this->url(array(
+                                                'controller' => 'adminCatalog', 
+                                                'action' => 'list'), 
+                                        'admin', true); ?>" 
+                            title="Catalog">Catalog</a></li>
+                </ul>
+                    <!--a href="<?= $this->url(array(
+                                'controller' => 'admin',
+                                'action'     => 'index',
+                                'module'     => 'storefront'
+                                ), 
+                                'admin', true
+                            ); 
+                         ?>" title="administration area">Admin</a-->
+                </li>
+                  <li class="<?=$this->conditionalNoDisplay('logout')?> ">
+                    <a href="<?= $this->url(array(
+                                'controller' => 'customer',
+                                'action'     => 'logout',
+                                ), 
+                                'default', true
+                            ); 
+                         ?>" title="logout">Logout</a></li>
+                  <li class="<?=$this->conditionalNoDisplay('login')?> 
+                             <?=$this->conditionalActive('login')?>">
+                    <a href="<?= $this->url(array(
+                                'controller' => 'customer',
+                                'action'     => 'login',
+                                ), 
+                                'default', true
+                            ); 
+                         ?>" title="login">Login</a></li>
+              </ul>
+          </div>
+            </div>
+          </div>
+        </div><!-- /.navbar -->
+      </div>
+    </div>
+                

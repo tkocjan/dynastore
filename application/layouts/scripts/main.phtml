@@ -1,0 +1,65 @@
+<?= $this->doctype() ?>
+<?php global $logger; ?>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+    <?= $this->headTitle() ?>    
+    <?= $this->headMeta() ?>
+    <?= $this->headStyle() ?>
+    <?= $this->headLink() ?>
+    
+    <?= $this->headScript() ?>
+    
+</head>
+<body>
+    <div class="container">
+    <?php include('zstore-header.phtml'); ?>
+    <br />
+    <div id="contentWrap" class="row">
+        <div class="left categorylist span3">
+            <div class="sub-nav">
+            <h3>select <span>category</span></h3>
+                <ul>
+                    <? foreach ($this->category() as $category): ?>
+                    <li><a href="<?=$this->url(
+                            array('categoryIdent' => $category->ident), 
+                            'catalog_category', true );?>">
+                            <?=$category->name; ?></a></li>
+                    <? endforeach; ?>
+                </ul>
+            </div>
+            <? if (0 < count($this->subCategories)):?>
+            <div class="sub-nav">
+            <h3>in this <span>category</span></h3>
+                <ul>
+                    <? foreach ($this->subCategories as $category): ?>
+                    <li><a href="<?=$this->url(
+                            array('categoryIdent' => $category->ident), 
+                            'catalog_category', true );?>">
+                            <?=$category->name; ?></a></li>
+                    <? endforeach; ?>
+                </ul>
+            </div> 
+            <? endif; ?>
+            <div>
+                <h3>in your <span>cart</span></h3>
+                <?= $this->Cart()->getSummary(); ?>
+            </div>
+        </div><!--.catagorylist (left column) -->
+        <div class="content left span8">
+            <?= $this->layout()->content ?> 
+       </div>
+    </div> <!--#contentWrap-->
+    
+    <div id="footer" class="clearfix">
+        <div class="left">
+            <span class="rss"><a href="/rss" title="products feed">RSS 2.0</a></span>
+        </div>
+        <div class="right">
+            &#169; 2013 Abidimi Inc.
+        </div>
+    </div>
+    </div>
+    <?= $this->inlineScript() ?>
+</body>
+</html>

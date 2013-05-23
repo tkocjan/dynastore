@@ -1,0 +1,56 @@
+<?php
+// call in layout with just conditionalActive('key_name')
+// this function is not a part of a class
+function conditionalActive($key) {
+    global $logger;
+    
+    //this is so we only have to get view once
+    static $view = null;
+    if (is_null($view)) {
+        $logger->info(__METHOD__.':setting view');
+        $view = Zend_Layout::getMvcInstance()->getView();
+    }
+    
+    if ($key == 'admin') {
+        if ($view->active == 'customer' || $view->active == 'catalog')
+            return 'active';
+        else 
+            return '';
+    }
+    
+    if ($view->active == $key) 
+        return 'active';
+    else 
+        return '';
+    
+    //return ($view->active == $key)?'active':'';
+}
+
+/* call in layout with just noDisplayClass('key_name') */
+/* this function is not a part of a class */
+function conditionalNoDisplay($key) {
+    global $logger;
+    
+    //this is so we only have to get view once
+    static $view = null;
+    if (is_null($view)) {
+        $logger->info(__METHOD__.':setting view');
+        $view = Zend_Layout::getMvcInstance()->getView();
+    }
+    
+    $noDisplay = 'noDisplay';
+    switch($key) {
+    case 'login':
+    case 'register':
+        if ($view->authInfo()->isLoggedIn()) return $noDisplay; 
+        break;
+    case 'logout':
+        if (!$view->authInfo()->isLoggedIn()) return $noDisplay; 
+        break;
+    case 'admin':
+        if ('Admin' != $view->AuthInfo('role')) return $noDisplay; 
+        break;
+    }
+
+    return '';
+}
