@@ -25,8 +25,8 @@ class CatalogService
     protected $productImageRepository;
     
     public function __construct($options = null,
-                         \Storefront_Model_Catalog_ICategoryRepository $categoryRepository = null,
-                         \Storefront_Model_Catalog_IProductRepository $productRepository = null)
+                         $categoryRepository = null,
+                         $productRepository = null)
     {      
         parent::__construct($options);
         if ($categoryRepository)

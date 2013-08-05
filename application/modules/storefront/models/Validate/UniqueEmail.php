@@ -7,16 +7,16 @@ class Storefront_Validate_UniqueEmail extends Zend_Validate_Abstract
         self::EMAIL_EXISTS => 'Email "%value%" already exists in our system',
     );
 
-    public function __construct(Zstore\Domain\User\UserService $model)
+    public function __construct(Zstore\Domain\User\UserService $service)
     {
-        $this->_model = $model;
+        $this->_service = $service;
     }
 
     public function isValid($value, $context = null)
     {
         $this->_setValue($value);
-        $currentUser = isset($context['userId']) ? $this->_model->getUserById($context['userId']) : null;
-        $user = $this->_model->getUserByEmail($value, $currentUser);
+        $currentUser = isset($context['userId']) ? $this->_service->getUserById($context['userId']) : null;
+        $user = $this->_service->getUserByEmail($value, $currentUser);
         
         if (null === $user) {
             return true;

@@ -219,8 +219,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $this->_view->headLink()->appendStylesheet($baseUrl.'/assets/main.css');
         $this->_view->headLink()->appendStylesheet($baseUrl.'/assets/form.css');
         $this->_view->headLink()->appendStylesheet('/js/bootstrap/2.3.0/css/bootstrap.css');
-        $this->_view->headLink()->appendStylesheet($baseUrl.'/assets/my-bootstrap.css');
         $this->_view->headLink()->appendStylesheet('/js/bootstrap/2.3.0/css/bootstrap-responsive.css');
+        $this->_view->headLink()->appendStylesheet($baseUrl.'/assets/my-bootstrap.css');
 
         //for head section
         $this->_view->headScript()->setFile(
@@ -319,8 +319,11 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     protected function _initDbCaches()
     {
         //error_log(__CLASS__.'::'.__METHOD__.': entry 10');
-        if ('testing' == $this->getEnvironment())
+        if (!ENABLE_DB_CACHES)
             return;
+                
+        //if ('testing' == $this->getEnvironment())
+        //    return;
         
         // Metadata cache for Zend_Db_Table
         /*

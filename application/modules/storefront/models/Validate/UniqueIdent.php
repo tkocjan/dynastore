@@ -7,15 +7,15 @@ class Storefront_Validate_UniqueIdent extends Zend_Validate_Abstract
         self::IDENT_EXISTS => 'Ident "%value%" already exists in our system',
     );
 
-    protected $_model;
+    protected $_service;
     protected $_method;
 
-    public function __construct(SF_Model_IService $model, $method)
+    public function __construct(Zstore\Domain\User\UserService $service, $method)
     {
-        $this->_model  = $model;
+        $this->_service  = $service;
         $this->_method = $method;
 
-        if (!method_exists($this->_model, $method)) {
+        if (!method_exists($this->_service, $method)) {
             throw new SF_Exception('Method ' . $method . 'does not exist in model');
         }
     }
@@ -24,7 +24,7 @@ class Storefront_Validate_UniqueIdent extends Zend_Validate_Abstract
     {
         $this->_setValue($value);
 
-        $found = call_user_func(array($this->_model, $this->_method), $value);
+        $found = call_user_func(array($this->_service, $this->_method), $value);
         
         if (null === $found) {
             return true;

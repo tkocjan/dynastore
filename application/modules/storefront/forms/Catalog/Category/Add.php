@@ -55,6 +55,7 @@ class Storefront_Form_Catalog_Category_Add extends SF_Form_Abstract
         $this->addElement('submit', 'add', array(
             'label' => 'Add Category',
             'decorators' => array('ViewHelper',array('HtmlTag',array('tag' => 'dd'))),
+            'attribs' => array('class'=>'btn'),
         ));
     }
 }

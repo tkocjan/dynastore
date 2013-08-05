@@ -82,7 +82,8 @@ class Storefront_Form_User_Base extends SF_Form_Abstract
         $this->addElement('submit', 'submit', array(
             'required' => false,
             'ignore'   => true,
-            'decorators' => array('ViewHelper',array('HtmlTag', array('tag' => 'dd', 'id' => 'form-submit')))
+            'decorators' => array('ViewHelper',array('HtmlTag', array('tag' => 'dd', 'id' => 'form-submit'))),
+            'attribs' => array('class'=>'btn')
         ));
 
          $this->addElement('hidden', 'userId', array(

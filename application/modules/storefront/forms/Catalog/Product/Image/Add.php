@@ -39,6 +39,7 @@ class Storefront_Form_Catalog_Product_Image_Add extends SF_Form_Abstract
         $this->addElement('submit', 'add', array(
             'label' => 'Upload',
             'decorators' => array('ViewHelper',array('HtmlTag',array('tag' => 'dd'))),
+            'attribs' => array('class'=>'btn'),
         ));
 
         $this->addElement('hidden', 'productId', array(

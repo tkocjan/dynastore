@@ -18,7 +18,7 @@ class Storefront_Model_Cart_CartEntity implements Storefront_Model_Cart_ICartEnt
     public $discountPercent;
     public $qty;
 
-    public function __construct(Storefront_Model_Catalog_IProductEntity $product, $qty)
+    public function __construct($product, $qty)
     {
         $this->productId           = (int) $product->productId;
         $this->name                 = $product->name;

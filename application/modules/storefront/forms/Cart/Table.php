@@ -29,13 +29,15 @@ class Storefront_Form_Cart_Table extends SF_Form_Abstract
             'decorators' => array(
                 'ViewHelper'
             ),
-            'label' => 'Update'
+            'label' => 'Update',
+            'attribs' => array('class'=>'btn'),
         ));
         $this->addElement('submit', 'submit_my_order', array(
             'decorators' => array(
                 'ViewHelper'
             ),
-            'label' => 'Submit Order'
+            'label' => 'Submit Order',
+            'attribs' => array('class'=>'btn btn-primary'),
         ));
     }
 }

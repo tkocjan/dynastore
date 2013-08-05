@@ -88,6 +88,7 @@ class Storefront_Form_Catalog_Product_Add extends SF_Form_Abstract
         $this->addElement('submit', 'add', array(
             'label' => 'Add Product',
             'decorators' => array('ViewHelper',array('HtmlTag',array('tag' => 'dd'))),
+            'attribs' => array('class'=>'btn'),
         ));
     }
 }

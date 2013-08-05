@@ -14,7 +14,7 @@ class UserService extends \SF_Model_AclService
     protected $userRepository;
     
     public function __construct($options = null,
-            \Storefront_Model_User_IUserRepository $userRepository = null) 
+            $userRepository = null) 
     {
         parent::__construct($options);
         
@@ -153,7 +153,7 @@ class UserService extends \SF_Model_AclService
             throw new \SF_Acl_Exception("Insufficient rights");
         }
 
-        if ($user instanceof \Storefront_Model_User_IUserEntity) {
+        if ($user instanceof IUserEntity) {
             $userId = (int) $user->userId;
         } else {
             $userId = (int) $user;

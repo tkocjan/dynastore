@@ -13,6 +13,35 @@ class Storefront_CatalogController extends Zend_Controller_Action
         //Logger::info(__METHOD__.': apc='.print_r(apc_sma_info(), true));
         
         $this->_catalogService = new Zstore\Domain\Catalog\CatalogService();
+        
+        /*
+        //mongodb
+        $m = new MongoClient();
+
+        // select a database
+        $db = $m->comedy;
+
+        // select a collection (analogous to a relational database's table)
+        $collection = $db->cartoons;
+
+        // add a record
+        //$document = array( "title" => "Calvin and Hobbes", "author" => "Bill Watterson" );
+        //$collection->insert($document);
+
+        // add another record, with a different "shape"
+        //$document = array( "title" => "XKCD", "online" => true );
+        //$collection->insert($document);
+
+        // find everything in the collection
+        $cursor = $collection->find();
+
+        // iterate through the results
+        foreach ($cursor as $document) {
+            Logger::info(__METHOD__.': mongo='.$document["title"]);
+        }
+         * 
+         */
+
         /*
         //below is for doctrine testing
         $userClassname = '\Zstore\Domain\User\UserEntity';

@@ -2,6 +2,7 @@
 define('ENABLE_INI_CACHE', false);
 define('ENABLE_DB_PROFILER', false);
 define('ENABLE_PLUGIN_CACHE', false);
+define('ENABLE_DB_CACHES', false);
 
 define('TEMP_PATH', realpath(APPLICATION_PATH.'/../data'));
 define('SESSION_PATH', TEMP_PATH.'/session');

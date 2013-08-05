@@ -26,6 +26,7 @@ class Storefront_Form_Catalog_Category_Select extends SF_Form_Abstract
         ));
         $this->addElement('submit', 'View', array(
             'decorators' => array('ViewHelper'),
+            'attribs' => array('class'=>'btn'),
         ));
     }
 }

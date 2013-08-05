@@ -70,7 +70,7 @@ class Storefront_Model_Cart_CartService
      * @param int $qty
      * @return Storefront_Model_Cart_CartEntity
      */
-    public function addItem(Storefront_Model_Catalog_IProductEntity $product, $qty)
+    public function addItem($product, $qty)
     {
         if (0 > $qty) {
             return false;
@@ -98,7 +98,7 @@ class Storefront_Model_Cart_CartService
             unset($this->_items[$product]);
         }
 
-        if ($product instanceof Storefront_Model_Catalog_IProductEntity) {
+        if ($product instanceof Zstore\Domain\Catalog\IProductEntity) {
             unset($this->_items[$product->productId]);
         }
         

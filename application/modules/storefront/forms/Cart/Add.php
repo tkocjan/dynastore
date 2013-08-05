@@ -33,7 +33,8 @@ class Storefront_Form_Cart_Add extends SF_Form_Abstract
             'decorators' => array(
                 'ViewHelper'
             ),
-            'label' => 'Add to cart'
+            'label' => 'Add to cart',
+            'attribs' => array('class'=>'btn btn-primary')
         ));
 
         $this->addElement('hidden', 'productId', array(

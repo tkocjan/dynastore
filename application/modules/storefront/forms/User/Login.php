@@ -36,6 +36,7 @@ class Storefront_Form_User_Login extends SF_Form_Abstract
             'required' => false,
             'ignore'   => true,
             'label'    => 'Login',
+            'attribs' => array('class'=>'btn')
         ));
         $this->setDecorators(array(
             'FormElements',

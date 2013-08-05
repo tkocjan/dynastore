@@ -2,13 +2,13 @@
 // Define path to application directory
 defined('APPLICATION_PATH')
     //don't need /../application but keeping for compatibility
-    or define('APPLICATION_PATH', realpath(__DIR__ . '/../application'));
+    || define('APPLICATION_PATH', realpath(__DIR__ . '/../application'));
 // Define application environment
 defined('APPLICATION_ENV')
     || define('APPLICATION_ENV', 
         (getenv('APPLICATION_ENV') ? getenv('APPLICATION_ENV') : 'production'));
 
-//error_log(__METHOD__.': APPLICATION_ENV='.APPLICATION_ENV);
+error_log(__METHOD__.': APPLICATION_ENV='.APPLICATION_ENV);
 
 require_once APPLICATION_PATH.'/constants.php';
 
