@@ -1,25 +1,26 @@
-<h3><?= $this->Escape($this->category->name); ?></h3>
-<p>
-    <?= $this->breadcrumb(); ?>
+<h3 id="ajax-cat-name"></h3>
+<p id="ajax-bread">
 </p>
-<? foreach($this->products as $product):  ?>
-<div class="row-fluid productitem clearfix">
-    <div class="span7">
-        <h4><a href="<?=$this->url(array('productIdent' => $product->ident, 
-                                   'categoryIdent' => $this->category->ident),
-                                   'catalog_category_product'); ?>"><?=$this->Escape($product->name); ?></a></h4>
-        <p><?=$this->Escape($product->shortDescription); ?></p>
-        <p><?=$this->productPrice($product); ?></p>
-        <?=$this->Cart()->addForm($product); ?>
-    </div>
-    <div class="span4">
-        <?=$this->productImage($product->defaultImage, array('class' => 'right'))->thumbnail(); ?>
-    </div>
+<div id="dyna-products">
+    <img src="<?=$this->baseUrl()?>/images/icons/preloader-icon.gif">
 </div>
-<? endforeach; ?>
+<script>
+    console.log('calling dynaproducts');
+    $('#dyna-products').load(
+        '<?=$this->baseUrl()?>/catalog/dynaproducts',
+        <?=json_encode($this->products)?>
+    );
+        
+    $.ajax(
+        '<?=$this->baseUrl()?>/catalog/ajaxcategory',
+        {
+            data: <?=json_encode($this->products)?>,
+            success: function(retData) {
+                $('#ajax-cat-name').html(retData.catName);
+                $('#ajax-bread').html(retData.bread);
+                $('#ajax-sub-cats').html(retData.subCats);
+            }
+        }
+    );
 
-<? if($this->products instanceof Zend_Paginator): ?>
-<?= $this->paginationControl($this->products,
-                             'Sliding',
-                             'catalog/_paginator.phtml'); ?>
-<? endif ?>
+</script>

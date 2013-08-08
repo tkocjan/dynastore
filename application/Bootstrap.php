@@ -218,8 +218,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $this->_view->headLink()->appendStylesheet($baseUrl.'/assets/reset.css');
         $this->_view->headLink()->appendStylesheet($baseUrl.'/assets/main.css');
         $this->_view->headLink()->appendStylesheet($baseUrl.'/assets/form.css');
-        $this->_view->headLink()->appendStylesheet('/js/bootstrap/2.3.0/css/bootstrap.css');
-        $this->_view->headLink()->appendStylesheet('/js/bootstrap/2.3.0/css/bootstrap-responsive.css');
+        $this->_view->headLink()->appendStylesheet($baseUrl.'/js/bootstrap/2.3.0/css/bootstrap.css');
+        $this->_view->headLink()->appendStylesheet($baseUrl.'/js/bootstrap/2.3.0/css/bootstrap-responsive.css');
         $this->_view->headLink()->appendStylesheet($baseUrl.'/assets/my-bootstrap.css');
 
         //for head section
@@ -228,11 +228,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                 'text/javascript',
                 array('conditional' => 'lt IE 9'));
         
+        $this->_view->headScript()->appendFile($baseUrl.'/js/jquery/1.9.1/jquery-1.9.1.js');
+        $this->_view->headScript()->appendFile($baseUrl.'/js/bootstrap/2.3.0/js/bootstrap.js');
+        
         //for bottom of html file
-        $this->_view->inlineScript()->setFile($baseUrl.'/js/jquery/1.9.1/jquery-1.9.1.js');
-//        $this->_view->inlineScript()->appendFile($baseUrl.'/js/bootstrap/2.3.0/js/bootstrap.js');
-        $this->_view->inlineScript()->appendFile('/js/bootstrap/2.3.0/js/bootstrap.js');
-       // $this->_view->headScriptBottom = $this->_view->headScript()->toString();
+        //$this->_view->inlineScript()->setFile($baseUrl.'/js/jquery/1.9.1/jquery-1.9.1.js');
+        //$this->_view->inlineScript()->appendFile('/js/bootstrap/2.3.0/js/bootstrap.js');
         
         // setting the site in the title
         $this->_view->headTitle('Storefront');
@@ -300,6 +301,39 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         );
 
         $router->addRoute('catalog_category', $route);
+        
+        $route = new Zend_Controller_Router_Route(
+            'catalog/dynaproducts',
+            array(
+                'action'        => 'dynaproducts',
+                'controller'    => 'catalog',
+                'module'        => 'storefront',
+            )
+        );
+
+        $router->addRoute('catalog_dynaproducts', $route);
+        
+        $route = new Zend_Controller_Router_Route(
+            'catalog/dynatopcats',
+            array(
+                'action'        => 'dynatopcats',
+                'controller'    => 'catalog',
+                'module'        => 'storefront',
+            )
+        );
+
+        $router->addRoute('catalog_dynatopcats', $route);
+        
+        $route = new Zend_Controller_Router_Route(
+            'catalog/ajaxcategory',
+            array(
+                'action'        => 'ajaxcategory',
+                'controller'    => 'catalog',
+                'module'        => 'storefront',
+            )
+        );
+
+        $router->addRoute('catalog_ajaxcategory', $route);
     }
 
     /**

@@ -26,7 +26,7 @@ class Storefront_CategoryController extends Zend_Controller_Action
         //Logger::info(__METHOD__.': entry');
         $id = $this->_getParam('categoryId', 0);
         $this->view->categories = 
-                $this->_catalogService->getCategoriesThatHaveParentId($id);
+                $this->_catalogService->getSubCategoriesOfId($id);
 
 //        $this->_helper->viewRenderer->setResponseSegment(
 //            $this->_getParam('responseSegment'));

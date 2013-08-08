@@ -23,6 +23,6 @@ class App_View_Helper_Category extends Zend_View_Helper_Abstract
         //Logger::info(__METHOD__.': entry');
         $catalogService = new Zstore\Domain\Catalog\CatalogService();
         return $catalogService//->getCached()
-                ->getCategoriesThatHaveParentId(null);
+                ->getSubCategoriesOfId(null);
     }
 }

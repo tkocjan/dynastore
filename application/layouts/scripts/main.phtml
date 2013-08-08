@@ -19,28 +19,19 @@
         <div class="left categorylist span3">
             <div class="sub-nav">
             <h3>select <span>category</span></h3>
-                <ul>
-                    <? foreach ($this->category() as $category): ?>
-                    <li><a href="<?=$this->url(
-                            array('categoryIdent' => $category->ident), 
-                            'catalog_category', true );?>">
-                            <?=$category->name; ?></a></li>
-                    <? endforeach; ?>
+                <ul id="dyna-top-cats">
+                    <img src="<?=$this->baseUrl()?>/images/icons/preloader-icon.gif">
                 </ul>
             </div>
-            <? if (0 < count($this->subCategories)):?>
-            <div class="sub-nav">
-            <h3>in this <span>category</span></h3>
-                <ul>
-                    <? foreach ($this->subCategories as $category): ?>
-                    <li><a href="<?=$this->url(
-                            array('categoryIdent' => $category->ident), 
-                            'catalog_category', true );?>">
-                            <?=$category->name; ?></a></li>
-                    <? endforeach; ?>
-                </ul>
+            <script>
+                $('#dyna-top-cats').load(
+                    '<?=$this->baseUrl()?>/catalog/dynatopcats'
+                );
+            </script>
+        
+
+            <div id="ajax-sub-cats" class="sub-nav">
             </div> 
-            <? endif; ?>
             <div>
                 <h3>in your <span>cart</span></h3>
                 <?= $this->Cart()->getSummary(); ?>

@@ -1,0 +1,17 @@
+<h3><?= $this->Escape($this->category->name); ?></h3>
+<p>
+<div id="dynabread">
+    <img src="<?=$this->baseUrl()?>/images/icons/preloader-icon.gif">
+</div>
+    <?= $this->breadcrumb(); ?>
+</p>
+<div id="dynaproducts">
+    <img src="<?=$this->baseUrl()?>/images/icons/preloader-icon.gif">
+</div>
+<script>
+    console.log('calling dynaproducts');
+    $('#dynaproducts').load(
+        '<?=$this->baseUrl()?>/catalog/dynaproducts',
+        <?=json_encode($this->products)?>
+    );
+</script>

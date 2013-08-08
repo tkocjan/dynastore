@@ -33,7 +33,7 @@ class Storefront_CatalogController extends Zend_Controller_Action
         }
 
         $subs = $this->_catalogModel->getCached('category')->
-            getCategoriesThatHaveParentId($category->categoryId);
+            getSubCategoriesOfId($category->categoryId);
         $this->getBreadcrumb($category);
         
         $this->view->assign(array(

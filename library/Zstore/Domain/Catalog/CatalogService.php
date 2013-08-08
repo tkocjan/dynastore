@@ -53,12 +53,12 @@ class CatalogService
      * @param int $id The parentId
      * @return \Zend_Db_Table_Rowset
      */
-    public function getCategoriesThatHaveParentId($parentId)
+    public function getSubCategoriesOfId($parentId)
     {
         //$parentID = (int) $parentID;
         
         return $this->categoryRepository->
-                getCategoriesThatHaveParentId($parentId);
+                getSubCategoriesOfId($parentId);
     }
     
     /**
@@ -148,7 +148,7 @@ class CatalogService
      */
     public function getCategoryChildrenIds($categoryId, $recursive = false)
     {
-        $categories = $this->getCategoriesThatHaveParentId($categoryId);
+        $categories = $this->getSubCategoriesOfId($categoryId);
         $cats = array();
                
         foreach ($categories as $category) {

@@ -31,7 +31,7 @@ class App_View_Helper_Cart extends Zend_View_Helper_Abstract
 
         $html  = '<p>Items: ' . $itemCount;
         $html .= ' | Total: '.$currency->toCurrency($this->cartModel->getSubTotal());
-        $html .= '<br /><a href="';
+        $html .= '<br /><a class="btn btn-primary" href="';
         $html .= $this->view->url(array(
             'controller' => 'cart', 
             'action' => 'view',
@@ -50,11 +50,9 @@ class App_View_Helper_Cart extends Zend_View_Helper_Abstract
         global $logger;
         $form = $this->cartModel->getForm('cartAdd');
         
-        $start = strlen($this->view->baseUrl());        
-        $url = substr($this->view->url(), $start+1);
         $form->populate(array(
             'productId' => $product->productId,
-            'returnto' => $url
+            'returnto' => $this->view->returnto,
         ));
         $form->setAction($this->view->url(array(
             'controller' => 'cart',

@@ -10,7 +10,7 @@ class DocCategoryRepository extends DocBaseRepository implements ICategoryReposi
 {
     protected $_primary = 'categoryId';
     
-    public function getCategoriesThatHaveParentId($parentId) 
+    public function getSubCategoriesOfId($parentId) 
     {    
         //Logger::info(__METHOD__.': $parentId='.var_export($parentId, true));
         

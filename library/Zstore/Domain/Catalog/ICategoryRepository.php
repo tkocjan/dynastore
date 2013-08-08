@@ -11,7 +11,7 @@ namespace Zstore\Domain\Catalog;
  */
 interface ICategoryRepository 
 {
-    public function getCategoriesThatHaveParentId($parentId);
+    public function getSubCategoriesOfId($parentId);
     public function getCategoryByIdent($ident);
     public function getCategoryById($id);
     public function getCategories();

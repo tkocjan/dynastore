@@ -114,10 +114,100 @@ class Storefront_CatalogController extends Zend_Controller_Action
          */
     }
 
+    public function dynatopcatsAction()
+    {
+        Logger::info(__METHOD__.': entry');
+        
+        $this->_helper->viewRenderer->setNoRender(true);
+        $this->_helper->layout->disableLayout();
+        
+        $topCats = $this->_catalogService//->getCached()
+                ->getSubCategoriesOfId(null);
+
+        echo $this->catsToHtml($topCats);
+    }
+
+    public function dynaproductsAction()
+    {
+        Logger::info(__METHOD__.': entry');
+        
+        $this->_helper->layout->disableLayout();
+        
+        $categoryIdent = $this->_getParam('categoryIdent');
+        $page = $this->_getParam('page');
+        $pageSize = $this->_getParam('pageSize');
+        $order = $this->_getParam('order');
+        $returnto = $this->_getParam('returnto');
+        
+        $this->view->products = $this->_catalogService->//getCached('product')->
+            getProductsByCategory(
+                $categoryIdent, $page, $pageSize, $order
+            );
+        $this->view->categoryIdent = $categoryIdent;
+        $this->view->returnto = $returnto;
+    }
+    
+    public function ajaxcategoryAction()
+    {
+        Logger::info(__METHOD__.': entry');
+        
+        $this->_helper->viewRenderer->setNoRender(true);
+        $this->_helper->layout->disableLayout();
+        header('Content-Type: application/json');
+        
+        $retData = new stdClass();
+        
+        $category = $this->_catalogService->//getCached('category')->
+            getCategoryByIdent($this->_getParam('categoryIdent', ''));
+        if (null === $category) {
+            throw new SF_Exception_404('Unknown category ' . 
+                $this->_getParam('categoryIdent'));
+        }
+        $retData->catName = $this->view->escape($category->name);
+        
+        $topCats = $this->_catalogService//->getCached()
+                ->getSubCategoriesOfId(null);
+
+        $retData->topCats = $this->catsToHtml($topCats);
+
+        //Logger::info(__METHOD__.': $categoryId='.var_export($category->categoryId, true));        
+        $subCats = $this->_catalogService->//getCached('category')->
+            getSubCategoriesOfId($category->categoryId);        
+        
+        if (count($subCats) == 0) {
+            $retData->subCats = '';
+        }
+        else {
+            $retData->subCats =
+                '<h3>in this <span>category</span></h3><ul>'.
+                $this->catsToHtml($subCats).
+                '</ul>';
+        }
+        
+        $this->view->bread = $this->getBreadcrumb($category);
+        $retData->bread = $this->view->breadcrumb();
+        
+        echo json_encode( $retData );
+    }
+    
+    protected function catsToHtml($categories)
+    {
+        $html = '';
+        foreach ($categories as $category) {
+            $url = $this->view->url(
+                        array('categoryIdent' => $category->ident), 
+                        'catalog_category', true );
+            $html .= 
+                "<li><a href='$url'>$category->name</a></li>";            
+        }
+        return $html;
+    }
+
     public function indexAction()
     {
         //Logger::info(__METHOD__.': entry');
         
+        /*
         $products = $this->_catalogService->//getCached('product')->
             getProductsByCategory(
                 $this->_getParam('categoryIdent', 0),
@@ -125,6 +215,20 @@ class Storefront_CatalogController extends Zend_Controller_Action
                 PRODUCT_PAGE_SIZE,
                 array('name')
             );
+         * 
+         */
+        $products = new StdClass();
+        $products->categoryIdent = $this->_getParam('categoryIdent', 0);
+        $products->page = $this->_getParam('page', 1);
+        $products->pageSize = PRODUCT_PAGE_SIZE;
+        $products->order = array('name');
+        $start = strlen($this->view->baseUrl());        
+        $products->returnto = substr($this->view->url(), $start+1);
+        
+        $this->view->products = $products;
+
+        /*
+        $categoryIdent = $this->_getParam('categoryIdent', '');
 
         $category = $this->_catalogService->//getCached('category')->
             getCategoryByIdent($this->_getParam('categoryIdent', ''));
@@ -135,39 +239,41 @@ class Storefront_CatalogController extends Zend_Controller_Action
 
         //Logger::info(__METHOD__.': $categoryId='.var_export($category->categoryId, true));        
         $subs = $this->_catalogService->//getCached('category')->
-            getCategoriesThatHaveParentId($category->categoryId);
-        $this->getBreadcrumb($category);
+            getSubCategoriesOfId($category->categoryId);
+        $bread = $this->getBreadcrumb($category);
         
         $this->view->assign(array(
             'category' => $category,
             'subCategories' => $subs,
-            'products' => $products
+            'products' => $products,
+            'bread' => $bread,
+            'categoryIdent' => $categoryIdent,
         ));
+         * 
+         */
     }
     
     public function viewAction()
     {
-        $product = $this->_catalogService->getProductByIdent(
+        $this->view->product = $this->_catalogService->getProductByIdent(
                 $this->_getParam('productIdent', 0));
         
-        if (null === $product) {
+        if (null === $this->view->product) {
             throw new SF_Exception_404(
                     'Unknown product ' . $this->_getParam('productIdent'));
         }
         
         $category = $this->_catalogService->getCategoryByIdent(
                 $this->_getParam('categoryIdent', ''));
-        $this->getBreadcrumb($category);
+        $this->view->bread = $this->getBreadcrumb($category);
         
-        $this->view->assign(array(
-            'product' => $product,
-            )
-        );
+        $start = strlen($this->view->baseUrl());        
+        $this->view->returnto = substr($this->view->url(), $start+1);        
     }
     
     public function getBreadcrumb($category)
     {
-        $this->view->bread = 
-            $this->_catalogService->getParentCategories($category);
+        return $this->_catalogService->
+                getParentCategories($category);
     }
 }
