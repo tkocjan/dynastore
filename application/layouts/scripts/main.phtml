@@ -20,18 +20,19 @@
             <div class="sub-nav">
             <h3>select <span>category</span></h3>
                 <ul id="dyna-top-cats">
-                    <img src="<?=$this->baseUrl()?>/images/icons/preloader-icon.gif">
+                    <img src="<?=$this->baseUrl()?>/images/icons/loading.gif">
                 </ul>
             </div>
             <script>
+            $(document).ready(function() {
+                console.log('loadhtmltopcategories');
                 $('#dyna-top-cats').load(
-                    '<?=$this->baseUrl()?>/catalog/dynatopcats'
+                    '<?=$this->baseUrl()?>/catalog/loadhtmltopcats'
                 );
+            });
             </script>
         
-
-            <div id="ajax-sub-cats" class="sub-nav">
-            </div> 
+            <div id="ajax-sub-cats" class="sub-nav"></div> 
             <div>
                 <h3>in your <span>cart</span></h3>
                 <?= $this->Cart()->getSummary(); ?>

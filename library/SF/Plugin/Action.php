@@ -15,10 +15,13 @@ class SF_Plugin_Action extends Zend_Controller_Plugin_Abstract
     public function preDispatch(Zend_Controller_Request_Abstract $request) {
         global $logger;
         
-        SF_Log::info(__METHOD__,
-            'Request: module='.$request->getModuleName().
-            ' controller='.$request->getControllerName().
-            ' action='.$request->getActionName()
+        //Logger::info(print_r($_SERVER, true));
+        
+        //SF_Log::debug(__METHOD__,
+        Logger::info(__METHOD__.
+            ': Request: module='.$request->getModuleName().
+            ', controller='.$request->getControllerName().
+            ', action='.$request->getActionName()
         );
         
         $view = Zend_Layout::getMvcInstance()->getView();

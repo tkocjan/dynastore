@@ -1,18 +1,23 @@
 <h3 id="ajax-cat-name"></h3>
 <p id="ajax-bread">
+    <!--img src="<?=$this->baseUrl()?>/images/icons/loading.gif"!-->
 </p>
 <div id="dyna-products">
-    <img src="<?=$this->baseUrl()?>/images/icons/preloader-icon.gif">
+    <img src="<?=$this->baseUrl()?>/images/icons/loading.gif">
 </div>
 <script>
+$(document).ready(function() {
     console.log('calling dynaproducts');
     $('#dyna-products').load(
-        '<?=$this->baseUrl()?>/catalog/dynaproducts',
+        '<?=$this->baseUrl()?>/catalog/loadhtmlproducts',
         <?=json_encode($this->products)?>
     );
-        
+});
+</script>
+<script>
+$(document).ready(function() {
     $.ajax(
-        '<?=$this->baseUrl()?>/catalog/ajaxcategory',
+        '<?=$this->baseUrl()?>/catalog/loadjsoncategory',
         {
             data: <?=json_encode($this->products)?>,
             success: function(retData) {
@@ -22,5 +27,5 @@
             }
         }
     );
-
+});
 </script>

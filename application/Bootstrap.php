@@ -264,7 +264,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                 'isAdmin'    => true
             )
         );
-
         $router->addRoute('admin', $route);
 
         // catalog category product route
@@ -281,7 +280,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                 'productIdent'  => '[a-zA-Z-_][a-zA-Z-_0-9]+'
             )
         );
-
         $router->addRoute('catalog_category_product', $route);
 
         // catalog category route
@@ -299,41 +297,37 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                 'page'          => '\d+'
             )
         );
-
         $router->addRoute('catalog_category', $route);
         
         $route = new Zend_Controller_Router_Route(
-            'catalog/dynaproducts',
+            'catalog/loadhtmlproducts',
             array(
-                'action'        => 'dynaproducts',
+                'action'        => 'loadhtmlproducts',
                 'controller'    => 'catalog',
                 'module'        => 'storefront',
             )
         );
-
-        $router->addRoute('catalog_dynaproducts', $route);
+        $router->addRoute('catalog_loadhtmlproducts', $route);
         
         $route = new Zend_Controller_Router_Route(
-            'catalog/dynatopcats',
+            'catalog/loadhtmltopcats',
             array(
-                'action'        => 'dynatopcats',
+                'action'        => 'loadhtmltopcats',
                 'controller'    => 'catalog',
                 'module'        => 'storefront',
             )
         );
-
         $router->addRoute('catalog_dynatopcats', $route);
         
         $route = new Zend_Controller_Router_Route(
-            'catalog/ajaxcategory',
+            'catalog/loadjsoncategory',
             array(
-                'action'        => 'ajaxcategory',
+                'action'        => 'loadjsoncategory',
                 'controller'    => 'catalog',
                 'module'        => 'storefront',
             )
         );
-
-        $router->addRoute('catalog_ajaxcategory', $route);
+        $router->addRoute('catalog_loadjsoncategory', $route);
     }
 
     /**

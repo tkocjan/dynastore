@@ -1,5 +1,7 @@
 /library/Zend/
-/data/
+/data/**/*
+/data/**/**/*
+/data/cache/
 /tests/log/
 /nbproject/private/
 /library/Bisna/nbproject/private/
