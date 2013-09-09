@@ -224,7 +224,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
         //for head section
         $this->_view->headScript()->setFile(
-                'http://html5shim.googlecode.com/svn/trunk/html5.js',
+                $baseUrl.'/js/html5shiv/3.6.2/html5shiv.js',
                 'text/javascript',
                 array('conditional' => 'lt IE 9'));
         
